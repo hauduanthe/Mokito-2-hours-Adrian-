@@ -37,15 +37,19 @@ class Test04MultipleThenReturnCalls {
 //		doReturn(Collections.singletonList(new Room("Room 1", 5))).when(roomServiceMock).getAvailableRooms();
 		when(this.roomServiceMock.getAvailableRooms())
 				.thenReturn(Collections.singletonList(new Room("Room 1", 5)))
-				.thenReturn(Collections.emptyList());
+				.thenReturn(Collections.emptyList())
+				.thenReturn(Arrays.asList(new Room("Rom1", 3), new Room("Room2", 3)));
 		int expectedFirstCall = 5;
 		int expectedSecondCall = 0;
+		int expectedThirdCall = 6;
 		// when
 		int actualFirst = bookingService.getAvailablePlaceCount();
 		int actualSecond = bookingService.getAvailablePlaceCount();
+		int actualThird = bookingService.getAvailablePlaceCount();
 		// then
 		assertAll(() -> assertEquals(expectedFirstCall, actualFirst),
-				() -> assertEquals(expectedSecondCall, actualSecond));
+				() -> assertEquals(expectedSecondCall, actualSecond),
+				() -> assertEquals(expectedThirdCall, actualThird));
 	}
 
 }
