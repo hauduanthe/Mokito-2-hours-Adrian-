@@ -7,8 +7,9 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.Executable;
+import org.mockito.Mockito;
 
-class Test05ThrowingExceptions {
+class Test06Matchers {
 	
 	private BookingService bookingService;
 
@@ -28,11 +29,11 @@ class Test05ThrowingExceptions {
 	}
 
 	@Test
-	void should_ThrowExeption_When_NoRoomAvailable() {
+	void should_NotCompleteBooking_When_PriceTooHigh() {
 		// given
-		BookingRequest bookingRequest = new BookingRequest("1", LocalDate.of(2020, 01, 01), LocalDate.of(2020, 1, 5), 2, false);
+		BookingRequest bookingRequest = new BookingRequest("1", LocalDate.of(2020, 01, 01), LocalDate.of(2020, 1, 5), 2,true );
 		
-		when(this.roomServiceMock.findAvailableRoomId(bookingRequest))
+		when(this.paymentServiceMock.pay(Mockito.any(), Mockito.eq(400.0)))
 				.thenThrow(BusinessException.class);
 		
 		//when
