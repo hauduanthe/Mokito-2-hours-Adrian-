@@ -46,7 +46,7 @@ class Test08Spies {
 				true);
 		bookingRequest.setRoomId("1.4");
 		
-		String bookingId = "1";
+		String bookingId = "1111";
 		doReturn(bookingRequest).when(bookingDAOMock).get(bookingId);
 		
 		//when
